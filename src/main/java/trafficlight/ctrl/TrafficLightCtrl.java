@@ -1,11 +1,10 @@
 package trafficlight.ctrl;
-
 import trafficlight.gui.TrafficLightGui;
 import trafficlight.states.State;
 
 public class TrafficLightCtrl {
 
-    private static TrafficLightCtrl ctrl = null;
+    private static TrafficLightCtrl ctrl;
 
     public static TrafficLightCtrl getInstance() {
         if (ctrl == null) {
@@ -34,6 +33,7 @@ public class TrafficLightCtrl {
         gui = new TrafficLightGui(this);
         gui.setVisible(true);
         //TODO useful to update the current state
+        currentState.notifyObserver();
     }
 
     private void initStates() {
@@ -42,6 +42,8 @@ public class TrafficLightCtrl {
             public State getNextState() {
                 previousState = currentState;
                 //TODO useful to update the current state and the old one
+                yellowState.notifyObserver();
+                notifyObserver();
                 return yellowState;
             }
             @Override
@@ -55,6 +57,8 @@ public class TrafficLightCtrl {
             public State getNextState() {
                 previousState = currentState;
                 //TODO useful to update the current state and the old one
+                yellowState.notifyObserver();
+                notifyObserver();
                 return yellowState;
             }
             @Override
@@ -69,9 +73,13 @@ public class TrafficLightCtrl {
                 if (previousState.equals(greenState)) {
                     previousState = currentState;
                     //TODO useful to update the current state and the old one
+                    redState.notifyObserver();
+                    notifyObserver();
                     return redState;
                 }else {
                     previousState = currentState;
+                    greenState.notifyObserver();
+                    notifyObserver();
                     //TODO useful to update the current state and the old one
                     return greenState;
                 }
