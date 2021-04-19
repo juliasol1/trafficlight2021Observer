@@ -1,4 +1,4 @@
-# Traffic Light
+# Traffic Light 2
 
 Das ist das Grundgerüst für die zweite Übung.
 
