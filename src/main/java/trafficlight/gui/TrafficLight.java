@@ -1,8 +1,5 @@
 package trafficlight.gui;
-
-
-import trafficlight.Subject;
-
+import trafficlight.Observer;
 import java.awt.*;
 
 public class TrafficLight extends Light implements Observer {
@@ -20,11 +17,6 @@ public class TrafficLight extends Light implements Observer {
         return isOn;
     }
 
-
-    //TODO implement a part of the pattern here
-    //my implementation:
-
-
     @Override
     public void update() {
         if (isOn) {
@@ -32,5 +24,7 @@ public class TrafficLight extends Light implements Observer {
         } else {
             turnOn(true);
         }
+
+
     }
 }
